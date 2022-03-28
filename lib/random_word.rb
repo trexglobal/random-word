@@ -80,9 +80,9 @@ module RandomWord
 
     # @return [Enumerator] Random adjective enumerator
     def adjs(opts = {})
-      @adjs ||= enumerator(load_word_list("adjs.json"), exclude_list)
+      @adjs ||= enumerator(load_word_list("safe.json"), exclude_list)
       word_list.set_constraints(opts)
-      @adjs
+      @adjs.downcase
     end
 
     # @return [Enumerator] Random phrase enumerator
