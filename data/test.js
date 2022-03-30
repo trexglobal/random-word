@@ -2,10 +2,14 @@
 
 const fs = require('fs');
 
-let rawdata = fs.readFileSync('adjs.json');
+let rawdata = fs.readFileSync('safe.json');
 let adjectives = JSON.parse(rawdata);
-let final_list = adjectives.filter(i => i !=null && i.length < 6 && i.length > 2)
-console.log(final_list);
+let final_list = adjectives.filter(i => i !=null && i.length < 6 && i.length > 2).map(i => i.toLowerCase())
+var uniq = final_list.reduce(function(a,b){
+    if (a.indexOf(b) < 0 ) a.push(b);
+    return a;
+  },[]);
+console.log(uniq);
 
-let data = JSON.stringify(final_list);
-fs.writeFileSync('filtered-adjs.json', data);
+let data = JSON.stringify(uniq);
+fs.writeFileSync('filtered-safe.json', data);
